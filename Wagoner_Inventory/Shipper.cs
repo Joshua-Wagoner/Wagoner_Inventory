@@ -22,7 +22,7 @@ namespace Wagoner_Inventory
         public string GetConfirmation()
         {
             return "1 " + currentItem.Product + " has been added"
-                + "\n Press any key to return to the menu"; ;
+                + "\n Press any key to return to the menu";
         }
 
         public void Add(IShippable item)
@@ -34,7 +34,14 @@ namespace Wagoner_Inventory
             UpdateItemIndex(item);
         }
 
-        public decimal ComputeShippingCharges()
+        public string GetShippingCharges()
+        {
+            return string.Format(
+                "Total shipping cost for this order is: ${0:.00}", 
+                ComputeShippingCharges());
+        }
+        
+        private decimal ComputeShippingCharges()
         {
             decimal totalShippingCost = 0;
 
@@ -69,6 +76,7 @@ namespace Wagoner_Inventory
             if(numCrackers > 0)
             s += "\n" + numCrackers + " Crackers";
 
+            s += "\nPress any key to return to the menu";
             return s;
         }
 

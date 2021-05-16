@@ -1,5 +1,10 @@
 ﻿using System;
-
+/* Joshua Wagoner
+ * IT112
+ * Notes: This was quite challenging, but I learned a lot from it!
+ * The code is portable,
+ * Behaviors not implemented, and why: All behaviors implemented.
+ */
 namespace Wagoner_Inventory
 {
     class Program
@@ -62,16 +67,13 @@ namespace Wagoner_Inventory
                 {
                     Console.Clear();
                     Console.WriteLine(shipper.ListItems());
-                    Console.WriteLine("Press any key to return to menu");
                     Console.ReadKey();
                     Console.Clear();
                 }
                 else if (key.Key == ConsoleKey.D6 || key.Key == ConsoleKey.NumPad6)
                 {
                     Console.Clear();
-                    Console.WriteLine(
-                        string.Format("Total shipping cost for this order is: ${0:.00}", 
-                        shipper.ComputeShippingCharges()));
+                    Console.WriteLine(shipper.GetShippingCharges());
                     optOut = true;
                 }
             }
