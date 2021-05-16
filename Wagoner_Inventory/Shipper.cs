@@ -37,7 +37,8 @@ namespace Wagoner_Inventory
         public string GetShippingCharges()
         {
             return string.Format(
-                "Total shipping cost for this order is: ${0:.00}", 
+                "Total shipping cost for this order is: ${0:.00}" 
+                + "\nPress any key to terminate", 
                 ComputeShippingCharges());
         }
         

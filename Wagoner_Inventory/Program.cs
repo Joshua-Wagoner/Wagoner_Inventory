@@ -77,8 +77,6 @@ namespace Wagoner_Inventory
                     optOut = true;
                 }
             }
-
-            Console.WriteLine("Press any key to terminate");
             Console.ReadKey();
         }
     }
