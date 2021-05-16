@@ -9,7 +9,7 @@ namespace Wagoner_Inventory
 
     class Shipper
     {
-        private IShippable[] shoppingCart = new IShippable[10];
+        private readonly IShippable[] shoppingCart = new IShippable[10];
 
         private IShippable currentItem;
 
@@ -18,19 +18,6 @@ namespace Wagoner_Inventory
         private int numBicycles;
         private int numCrackers;
         private int numLawnMowers;
-
-        private decimal totalShippingCost;
-
-        public string GetShipperMenu()
-        {
-            return "Choose from the following options:"
-                + "\n1. Add a Bicycle to the shipment"
-                + "\n2. Add a Lawn Mower to the shipment"
-                + "\n3. Add a Baseball Glove to the shipment"
-                + "\n4. Add Crackers to the shipment"
-                + "\n5. List Shipment Items"
-                + "\n6. Compute Shipping Charges"; ;
-        }
 
         public string GetConfirmation()
         {
@@ -43,17 +30,21 @@ namespace Wagoner_Inventory
             shoppingCart[shoppingCartIndex] = item;
             currentItem = item;
             shoppingCartIndex++;
-            totalShippingCost += item.ShipCost;
 
             UpdateItemIndex(item);
         }
 
-        public string GetShippingCharges()
+        public decimal ComputeShippingCharges()
         {
-            if(totalShippingCost >= 1.00M)
-                return string.Format("Total shipping costs for this order is: {0:C}", totalShippingCost);
-            else
-                return string.Format("Total shipping costs for this order is: ${0:.00}", totalShippingCost);
+            decimal totalShippingCost = 0;
+
+            for(int i = 0; i < shoppingCart.Length; i++)
+            {
+                if(shoppingCart[i] != null)
+                totalShippingCost += shoppingCart[i].ShipCost;
+            }    
+
+            return totalShippingCost;
         }
 
         public string ListItems()
@@ -62,19 +53,20 @@ namespace Wagoner_Inventory
 
             if(numBicycles > 1)
                 s += "\n" + numBicycles + " Bicycles";
-            else
+            else if(numBicycles == 1)
                 s += "\n" + numBicycles + " Bicycle";
 
             if(numBaseballGloves > 1)
                 s += "\n" + numBaseballGloves + " Baseball Gloves";
-            else
+            else if(numBaseballGloves == 1)
                 s += "\n" + numBaseballGloves + " Baseball Glove";
 
             if (numLawnMowers > 1)
                 s += "\n" + numLawnMowers + " Lawn Mowers";
-            else
+            else if(numLawnMowers == 1)
                 s += "\n" + numLawnMowers + " Lawn Mower";
 
+            if(numCrackers > 0)
             s += "\n" + numCrackers + " Crackers";
 
             return s;

@@ -7,16 +7,77 @@ namespace Wagoner_Inventory
         static void Main(string[] args)
         {
             Shipper shipper = new Shipper();
+            ConsoleKeyInfo key;
 
-            Console.WriteLine(shipper.GetShipperMenu());
+            bool optOut = false;
 
-            shipper.Add(new Crackers());
-            Console.WriteLine(shipper.GetConfirmation());
+            while(!optOut)
+            {
+                Console.WriteLine(
+                    "Choose from the following options:"
+                    + "\n1. Add a Bicycle to the shipment"
+                    + "\n2. Add a Lawn Mower to the shipment"
+                    + "\n3. Add a Baseball Glove to the shipment"
+                    + "\n4. Add Crackers to the shipment"
+                    + "\n5. List Shipment Items"
+                    + "\n6. Compute Shipping Charges");
 
-            Console.WriteLine(shipper.ListItems());
-            Console.WriteLine(shipper.GetShippingCharges());
+                key = Console.ReadKey(true);
 
-            Console.Read();
+                Console.WriteLine();
+
+                if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)
+                {
+                    shipper.Add(new Bicycle());
+                    Console.Clear();
+                    Console.WriteLine(shipper.GetConfirmation());
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
+                {
+                    shipper.Add(new LawnMower());
+                    Console.Clear();
+                    Console.WriteLine(shipper.GetConfirmation());
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
+                {
+                    shipper.Add(new BaseballGlove());
+                    Console.Clear();
+                    Console.WriteLine(shipper.GetConfirmation());
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (key.Key == ConsoleKey.D4 || key.Key == ConsoleKey.NumPad4)
+                {
+                    shipper.Add(new Crackers());
+                    Console.Clear();
+                    Console.WriteLine(shipper.GetConfirmation());
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (key.Key == ConsoleKey.D5 || key.Key == ConsoleKey.NumPad5)
+                {
+                    Console.Clear();
+                    Console.WriteLine(shipper.ListItems());
+                    Console.WriteLine("Press any key to return to menu");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (key.Key == ConsoleKey.D6 || key.Key == ConsoleKey.NumPad6)
+                {
+                    Console.Clear();
+                    Console.WriteLine(
+                        string.Format("Total shipping cost for this order is: ${0:.00}", 
+                        shipper.ComputeShippingCharges()));
+                    optOut = true;
+                }
+            }
+
+            Console.WriteLine("Press any key to terminate");
+            Console.ReadKey();
         }
     }
 }
